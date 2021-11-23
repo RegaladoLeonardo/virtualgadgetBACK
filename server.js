@@ -17,7 +17,8 @@ const io = socketio(server);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-  res.send('ok');
+  console.log("funciona: "+ req.query.nombre);
+  res.send('');
 })
 
 const botName = 'Blumile bot '
