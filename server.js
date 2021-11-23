@@ -17,8 +17,8 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  name = req.url.nombre
+app.get('/:nombre', (req, res) => {
+  name = req.params.nombre
   console.log("funciona: "+ req.query);
   res.send('');
 })
