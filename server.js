@@ -3,7 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
-const name = '';
+let name = '';
 const {
    userJoin,
    getCurrentUser,
@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('');
 })
 
-const botName =  name
+const botName =  name;
 
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
