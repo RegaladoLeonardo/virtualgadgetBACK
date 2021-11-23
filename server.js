@@ -17,13 +17,13 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/:nombre', (req, res) => {
-  name = req.body.nombre
+app.get('/', (req, res) => {
+  name = req.url.nombre
   console.log("funciona: "+ req.query);
   res.send('');
 })
 
-const botName =  name;
+const botName =  'Blumile bot '+ name;
 
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
