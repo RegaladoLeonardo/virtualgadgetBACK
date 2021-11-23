@@ -3,6 +3,20 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
+/*
+const valores = window.location.search;
+const urlParams = new URLSearchParams(valores, urlParams);
+*/
+let info = {
+  nombre: '',
+  id: 0,
+  setNombre: function(nombre) {
+    this.nombre = nombre;
+  },
+  getNombre() { 
+    return this.nombre;
+  }
+}
 
 /*
 let nombre='';
@@ -28,18 +42,24 @@ const router = express.Router();
 
 
 router.get('/catch', (req, res) => {
+
   console.log(req.query.name);
+  info.setNombre(req.query.name);
+
+  console.log("lo que se obtuvo fue: "+ info.getNombre());
   //alert(req.query.name);
 
   console.log(__dirname);
-  res.redirect('http://localhost:3000');
+  // res.redirect('http://localhost:3000');
+  res.redirect('https://chats-virtualgadget.herokuapp.com');
+  
 })
 
 app.use('/' ,router);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName =  'Blumile bot ' ;
+const botName =  'Blumile bot ';
 
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
@@ -48,7 +68,7 @@ io.on('connection', socket => {
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName, `Bienvenido a la ${room} ${user.username}`));
+      socket.emit('message', formatMessage(botName + info.getNombre() , `Bienvenido a la ${room} ${user.username}`));
   
       // Broadcast when a user connects
       socket.broadcast
