@@ -3,6 +3,7 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
+const name = '';
 const {
    userJoin,
    getCurrentUser,
@@ -16,12 +17,13 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/:nombre', (req, res) => {
-  console.log("funciona: "+ req.query.nombre);
+app.get('/', (req, res) => {
+  name = req.query.nombre
+  console.log("funciona: "+ req.query);
   res.send('');
 })
 
-const botName = 'Blumile bot '
+const botName =  name
 
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
