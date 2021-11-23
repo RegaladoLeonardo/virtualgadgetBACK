@@ -3,7 +3,16 @@ const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
 const formatMessage = require('./utils/messages');
-let name = '';
+
+/*
+let nombre='';
+
+
+function square(nombre) {
+  this.nombre = nombre;
+}
+
+*/
 const {
    userJoin,
    getCurrentUser,
@@ -19,15 +28,16 @@ const router = express.Router();
 
 router.get('/catch', (req, res) => {
   console.log(req.query.name);
+  this.name = req.query.name
   console.log(__dirname);
-  res.redirect('https://chats-virtualgadget.herokuapp.com/');
+  res.redirect('http://localhost:3000');
 })
 
 app.use('/' ,router);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName =  'Blumile bot '+ name;
+const botName =  'Blumile bot ' ;
 
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
