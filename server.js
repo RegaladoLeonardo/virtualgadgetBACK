@@ -28,9 +28,8 @@ const router = express.Router();
 
 router.get('/catch', (req, res) => {
   console.log(req.query.name);
-  this.name = req.query.name
   console.log(__dirname);
-  res.redirect('http://localhost:3000');
+  res.redirect('https://chats-virtualgadget.herokuapp.com');
 })
 
 app.use('/' ,router);
