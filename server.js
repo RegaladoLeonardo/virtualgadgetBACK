@@ -15,13 +15,17 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-app.use(express.static(path.join(__dirname, 'public')));
+const router = express.Router();
 
-app.get('/:nombre', (req, res) => {
-  name = req.params.nombre
-  console.log("funciona: "+ req.query);
-  res.send('');
+router.get('/catch', (req, res) => {
+  console.log(req.query.name);
+  console.log(__dirname);
+  res.redirect('https://chats-virtualgadget.herokuapp.com/');
 })
+
+app.use('/' ,router);
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 const botName =  'Blumile bot '+ name;
 
