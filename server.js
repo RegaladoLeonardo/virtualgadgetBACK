@@ -26,10 +26,13 @@ const io = socketio(server);
 
 const router = express.Router();
 
+
 router.get('/catch', (req, res) => {
   console.log(req.query.name);
+  //alert(req.query.name);
+
   console.log(__dirname);
-  res.redirect('https://chats-virtualgadget.herokuapp.com');
+  res.redirect('http://localhost:3000');
 })
 
 app.use('/' ,router);
