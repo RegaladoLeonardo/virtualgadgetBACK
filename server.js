@@ -16,7 +16,7 @@ const io = socketio(server);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/:nombre', (req, res) => {
   console.log("funciona: "+ req.query.nombre);
   res.send('');
 })
