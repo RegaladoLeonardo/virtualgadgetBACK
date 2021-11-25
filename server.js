@@ -68,14 +68,14 @@ io.on('connection', socket => {
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName + info.getNombre() , `Bienvenido a la ${room} ${user.username}`));
+      socket.emit('message', formatMessage(botName , `Bienvenido a la ${room} ${user.username}`));
   
       // Broadcast when a user connects
       socket.broadcast
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username} a ingresado a la sala`)
+          formatMessage(botName, `${user.username} ' (${info.getNombre() }) ingresado a la sala`)
         );
   
       // Send users and room info
