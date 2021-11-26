@@ -13,6 +13,16 @@ function square(nombre) {
 }
 
 */
+let info = {
+  nombre:'',
+  id:0,
+  setNombre:function(nombre){
+    this.nombre = nombre;
+  },
+  getNombre(){
+    return this.nombre;
+  }
+}
 const {
    userJoin,
    getCurrentUser,
@@ -33,6 +43,11 @@ router.get('/catch', (req, res) => {
 
   console.log(__dirname);
   res.redirect('http://localhost:3000');
+
+  console.log(req.query.name);
+  info.setNombre(req.query.name);
+
+  console.log("lo que se obtuvo fue:"+info.getNombre());
 })
 
 app.use('/' ,router);
@@ -48,7 +63,7 @@ io.on('connection', socket => {
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName, `Bienvenido a la ${room} ${user.username}`));
+      socket.emit('message', formatMessage(botName, `Bienvenido a la ${room} ${user.username} (${info.getNombre()})`));
   
       // Broadcast when a user connects
       socket.broadcast
