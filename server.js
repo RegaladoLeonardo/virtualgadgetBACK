@@ -42,7 +42,7 @@ router.get('/catch', (req, res) => {
   //alert(req.query.name);
 
   console.log(__dirname);
-  res.redirect('http://localhost:3000');
+  res.redirect('https://chats-virtualgadget.herokuapp.com');
 
   console.log(req.query.name);
   info.setNombre(req.query.name);
