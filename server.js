@@ -70,7 +70,7 @@ io.on('connection', socket => {
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username} a ingresado a la sala`)
+          formatMessage(botName, `${user.username}  (${info.getNombre()}) a ingresado a la sala`)
         );
   
       // Send users and room info
@@ -94,7 +94,7 @@ io.on('connection', socket => {
       if (user) {
         io.to(user.room).emit(
           'message',
-          formatMessage(botName, `${user.username} ha salido de la sala`)
+          formatMessage(botName, `${user.username}  (${info.getNombre()}) ha salido de la sala`)
         );
   
         // Send users and room info
