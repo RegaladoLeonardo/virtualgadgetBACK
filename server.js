@@ -18,6 +18,7 @@ let info = {
   }
 }
 
+
 /*
 let nombre='';
 
@@ -50,8 +51,8 @@ router.get('/catch', (req, res) => {
   //alert(req.query.name);
 
   console.log(__dirname);
-  // res.redirect('http://localhost:3000');
-  res.redirect('https://chats-virtualgadget.herokuapp.com');
+   res.redirect('http://localhost:3000');
+  //res.redirect('https://chats-virtualgadget.herokuapp.com');
   
 })
 
@@ -75,7 +76,7 @@ io.on('connection', socket => {
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username} ' (${info.getNombre() }) ingresado a la sala`)
+          formatMessage(botName, `${user.username}  (${info.getNombre() }) ingresado a la sala`)
         );
   
       // Send users and room info
