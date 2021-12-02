@@ -28,6 +28,16 @@ function square(nombre) {
 }
 
 */
+let info = {
+  nombre:'',
+  id:0,
+  setNombre:function(nombre){
+    this.nombre = nombre;
+  },
+  getNombre(){
+    return this.nombre;
+  }
+}
 const {
    userJoin,
    getCurrentUser,
@@ -51,9 +61,12 @@ router.get('/catch', (req, res) => {
   //alert(req.query.name);
 
   console.log(__dirname);
-   res.redirect('http://localhost:3000');
-  //res.redirect('https://chats-virtualgadget.herokuapp.com');
-  
+  res.redirect('https://chats-virtualgadget.herokuapp.com');
+
+  console.log(req.query.name);
+  info.setNombre(req.query.name);
+
+  console.log("lo que se obtuvo fue:"+info.getNombre());
 })
 
 app.use('/' ,router);
@@ -69,14 +82,14 @@ io.on('connection', socket => {
       socket.join(user.room);
   
       // Welcome current user
-      socket.emit('message', formatMessage(botName + info.getNombre() , `Bienvenido a la ${room} ${user.username}`));
+      socket.emit('message', formatMessage(botName, `Bienvenido a la ${room} ${user.username}`));
   
       // Broadcast when a user connects
       socket.broadcast
         .to(user.room)
         .emit(
           'message',
-          formatMessage(botName, `${user.username}  (${info.getNombre() }) ingresado a la sala`)
+          formatMessage(botName, `${user.username} a ingresado a la sala`)
         );
   
       // Send users and room info
@@ -100,7 +113,7 @@ io.on('connection', socket => {
       if (user) {
         io.to(user.room).emit(
           'message',
-          formatMessage(botName, `${user.username} ha salido de la sala`)
+          formatMessage(botName, `${user.username}  (${info.getNombre()}) ha salido de la sala`)
         );
   
         // Send users and room info
